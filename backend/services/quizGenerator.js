@@ -1,8 +1,8 @@
-import Anthropic from '@anthropic-ai/sdk';
-
-const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+import Groq from 'groq-sdk';
 
 export async function generateQuiz(text, { nbQuestions, difficulty, language }) {
+  const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
+
   const prompt = `Tu es un expert pédagogique. À partir du texte suivant, génère exactement ${nbQuestions} questions QCM en ${language}.
 
 Niveau de difficulté : ${difficulty}
@@ -29,18 +29,14 @@ Réponds UNIQUEMENT avec un JSON valide, sans texte avant ou après :
 TEXTE DU COURS :
 ${text}`;
 
-  const response = await client.messages.create({
-    model: 'claude-opus-4-5',
+  const response = await client.chat.completions.create({
+    model: 'llama-3.1-8b-instant',
+    messages: [{ role: 'user', content: prompt }],
     max_tokens: 4000,
-    messages: [{ role: 'user', content: prompt }]
   });
 
-  const raw = response.content[0].text.trim();
-
-  // Parse JSON proprement
+  const raw = response.choices[0].message.content.trim();
   const jsonStart = raw.indexOf('[');
   const jsonEnd = raw.lastIndexOf(']') + 1;
-  const jsonStr = raw.slice(jsonStart, jsonEnd);
-
-  return JSON.parse(jsonStr);
+  return JSON.parse(raw.slice(jsonStart, jsonEnd));
 }
