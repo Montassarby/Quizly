@@ -95,7 +95,7 @@ npm install
 
 ### 3. Configurer les variables d'environnement
 
-Créer un fichier `.env` dans `backend/` :
+Créer un fichier `.env` dans `backend/`, puis ajoute ta clé API générée depuis Groq (https://console.groq.com/keys):
 
 ```env
 GROQ_API_KEY=gsk_XXXXXXXXXXXXXXXXXXXXXXXX
