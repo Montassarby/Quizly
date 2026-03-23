@@ -33,7 +33,7 @@ router.post('/generate', upload.single('pdf'), async (req, res) => {
       return res.status(400).json({ error: 'PDF trop court ou illisible.' });
     }
 
-    // 2. Générer le quiz avec Claude
+    // 2. Générer le quiz avec groq
     const quiz = await generateQuiz(text, { nbQuestions, difficulty, language });
 
     res.json({ success: true, quiz });
