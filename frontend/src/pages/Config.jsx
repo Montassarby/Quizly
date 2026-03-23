@@ -55,7 +55,7 @@ export default function Config({ goTo, config, setConfig, pdfFile, setQuestions 
         <div className="h-full bg-[#00B87D] rounded-full transition-all duration-500"
           style={{ width: `${(loadStep / steps.length) * 100}%` }}/>
       </div>
-      <div className="text-sm text-[#6B6B7B] font-light">Claude AI génère ton quiz…</div>
+      <div className="text-sm text-[#6B6B7B] font-light">Groq AI génère ton quiz…</div>
     </div>
   )
 
@@ -136,7 +136,7 @@ export default function Config({ goTo, config, setConfig, pdfFile, setQuestions 
       <button onClick={generate}
         className="w-full py-4 bg-[#00E5A0] text-[#0D0D0F] rounded-xl font-syne font-bold text-base flex items-center justify-center gap-2 hover:bg-[#00B87D] hover:text-white transition-all hover:-translate-y-0.5 shadow-lg shadow-[#00E5A0]/20">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        Générer avec Claude AI
+        Générer avec Groq AI
       </button>
     </div>
   )

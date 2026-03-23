@@ -17,7 +17,7 @@ export default function Home({ goTo, setPdfFile, pdfFile }) {
       <div className="p-16 flex flex-col justify-center border-r border-[#E4E1DA]">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#E8F9F3] border border-[#00B87D]/20 rounded-full font-syne text-xs font-semibold text-[#00B87D] mb-8 w-fit">
           <span className="w-1.5 h-1.5 rounded-full bg-[#00B87D] animate-pulse"/>
-          Propulsé par Claude AI
+          Propulsé par Groq AI
         </div>
         <h1 className="font-syne font-extrabold text-5xl leading-tight tracking-tight mb-5">
           Transforme tes<br/>
