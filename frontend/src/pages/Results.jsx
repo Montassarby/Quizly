@@ -12,7 +12,6 @@ export default function Results({ goTo, score, config }) {
     <div className="bg-[#0D0D0F] min-h-[calc(100vh-60px)]">
       <div className="max-w-3xl mx-auto px-10 py-16">
 
-        {/* Score ring */}
         <div className="text-center mb-14">
           <div className="relative w-40 h-40 mx-auto mb-7">
             <svg viewBox="0 0 160 160" className="-rotate-90 w-full h-full">
@@ -33,7 +32,6 @@ export default function Results({ goTo, score, config }) {
           <p className="text-white/40 font-light">{grade[1]}</p>
         </div>
 
-        {/* Stats */}
         <div className="grid grid-cols-3 gap-3 mb-10">
           {[['Correctes', score.correct, '#00E5A0'],
             ['Incorrectes', score.wrong, '#FF5C3A'],
@@ -45,7 +43,6 @@ export default function Results({ goTo, score, config }) {
           ))}
         </div>
 
-        {/* Review */}
         {score.answers?.length > 0 && (
           <>
             <div className="font-syne text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Révision des réponses</div>
@@ -70,7 +67,6 @@ export default function Results({ goTo, score, config }) {
           </>
         )}
 
-        {/* Actions */}
         <div className="flex gap-3 justify-center flex-wrap">
           <button onClick={() => goTo(3)}
             className="px-7 py-3.5 bg-[#00E5A0] text-[#0D0D0F] rounded-xl font-syne font-bold flex items-center gap-2 hover:bg-[#00B87D] hover:text-white transition-all hover:-translate-y-0.5">

@@ -72,7 +72,6 @@ export default function Config({ goTo, config, setConfig, pdfFile, setQuestions 
       </div>
 
       <div className="grid grid-cols-2 gap-6 mb-8">
-        {/* Nombre de questions */}
         <div className="bg-[#F7F4EE] border border-[#E4E1DA] rounded-2xl p-6">
           <div className="font-syne text-xs font-semibold tracking-widest uppercase text-[#6B6B7B] mb-4">Nombre de questions</div>
           <div className="flex items-center gap-4">
@@ -85,7 +84,6 @@ export default function Config({ goTo, config, setConfig, pdfFile, setQuestions 
           <div className="text-xs text-[#6B6B7B] mt-2">Entre 5 et 50 questions</div>
         </div>
 
-        {/* Difficulté */}
         <div className="bg-[#F7F4EE] border border-[#E4E1DA] rounded-2xl p-6">
           <div className="font-syne text-xs font-semibold tracking-widest uppercase text-[#6B6B7B] mb-4">Difficulté</div>
           <div className="flex flex-col gap-2">
@@ -105,7 +103,6 @@ export default function Config({ goTo, config, setConfig, pdfFile, setQuestions 
           </div>
         </div>
 
-        {/* Langue */}
         <div className="bg-[#F7F4EE] border border-[#E4E1DA] rounded-2xl p-6">
           <div className="font-syne text-xs font-semibold tracking-widest uppercase text-[#6B6B7B] mb-4">Langue</div>
           <div className="flex gap-2 flex-wrap">
@@ -119,7 +116,6 @@ export default function Config({ goTo, config, setConfig, pdfFile, setQuestions 
           </div>
         </div>
 
-        {/* Résumé */}
         <div className="bg-[#0D0D0F] rounded-2xl p-6 flex flex-col justify-between">
           <div className="font-syne text-xs font-semibold tracking-widest uppercase text-white/30 mb-4">Résumé</div>
           <div className="grid grid-cols-2 gap-4">

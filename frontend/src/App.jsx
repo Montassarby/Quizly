@@ -19,7 +19,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen">
-      {/* NAV */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-[#F7F4EE]/90 backdrop-blur border-b border-[#E4E1DA] h-[60px] flex items-center justify-between px-10">
         <div className="font-syne font-extrabold text-xl tracking-tight flex items-center gap-2">
           <svg width="28" height="28" viewBox="0 0 72 72" fill="none">
@@ -50,7 +49,6 @@ export default function App() {
         </div>
       </nav>
 
-      {/* SCREENS */}
       <div className="pt-[60px]">
         {screen === 1 && <Home goTo={goTo} setPdfFile={setPdfFile} pdfFile={pdfFile} />}
         {screen === 2 && <Config goTo={goTo} config={config} setConfig={setConfig} pdfFile={pdfFile} setQuestions={setQuestions} />}

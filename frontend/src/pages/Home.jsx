@@ -13,7 +13,6 @@ export default function Home({ goTo, setPdfFile, pdfFile }) {
 
   return (
     <div className="min-h-[calc(100vh-60px)] grid grid-cols-2">
-      {/* LEFT */}
       <div className="p-16 flex flex-col justify-center border-r border-[#E4E1DA]">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-[#E8F9F3] border border-[#00B87D]/20 rounded-full font-syne text-xs font-semibold text-[#00B87D] mb-8 w-fit">
           <span className="w-1.5 h-1.5 rounded-full bg-[#00B87D] animate-pulse"/>
@@ -37,7 +36,6 @@ export default function Home({ goTo, setPdfFile, pdfFile }) {
         </div>
       </div>
 
-      {/* RIGHT */}
       <div className="p-16 flex flex-col justify-center bg-white">
         <div className="font-syne text-xs font-semibold tracking-widest uppercase text-[#6B6B7B] mb-5">
           Étape 1 — Importe ton cours

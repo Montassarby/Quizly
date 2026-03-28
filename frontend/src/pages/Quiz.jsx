@@ -54,7 +54,6 @@ export default function Quiz({ goTo, questions, setScore }) {
 
   return (
     <div className="max-w-2xl mx-auto px-10 py-12">
-      {/* Top bar */}
       <div className="flex items-center justify-between mb-10">
         <div className="flex-1 max-w-sm">
           <div className="flex justify-between font-syne text-xs font-semibold text-[#6B6B7B] mb-2">
@@ -75,7 +74,6 @@ export default function Quiz({ goTo, questions, setScore }) {
         </div>
       </div>
 
-      {/* Question card */}
       <div className="bg-white border border-[#E4E1DA] rounded-3xl p-10 mb-5 shadow-sm">
         <div className="font-syne text-xs font-semibold tracking-widest uppercase text-[#00B87D] mb-4">
           Question {current + 1}
@@ -111,7 +109,6 @@ export default function Quiz({ goTo, questions, setScore }) {
         )}
       </div>
 
-      {/* Actions */}
       <div className="flex items-center justify-between">
         <button onClick={handleNext}
           className="px-5 py-3 border border-[#E4E1DA] rounded-xl font-syne text-sm font-semibold text-[#6B6B7B] hover:border-[#0D0D0F] hover:text-[#0D0D0F] transition-all">
