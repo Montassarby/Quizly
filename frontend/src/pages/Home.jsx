@@ -1,14 +1,27 @@
 import { useState } from 'react'
 
+const MAX_SIZE_MB = 10
+const MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024
+
 export default function Home({ goTo, setPdfFile, pdfFile }) {
   const [dragging, setDragging] = useState(false)
+  const [error, setError] = useState(null)
 
   const handleFile = (file) => {
-    if (file && file.type === 'application/pdf') {
-      setPdfFile(file)
-    } else {
-      alert('Fichier PDF uniquement !')
+    setError(null)
+
+    if (!file || file.type !== 'application/pdf') {
+      setError('Fichier PDF uniquement.')
+      return
     }
+
+    if (file.size > MAX_SIZE_BYTES) {
+      setError(`Fichier trop volumineux : ${(file.size / 1024 / 1024).toFixed(1)} Mo. La limite est de ${MAX_SIZE_MB} Mo.`)
+      setPdfFile(null)
+      return
+    }
+
+    setPdfFile(file)
   }
 
   return (
@@ -47,25 +60,70 @@ export default function Home({ goTo, setPdfFile, pdfFile }) {
           onDrop={(e) => { e.preventDefault(); setDragging(false); handleFile(e.dataTransfer.files[0]) }}
           onClick={() => document.getElementById('fileInput').click()}
           className={`border-2 border-dashed rounded-2xl p-14 text-center cursor-pointer transition-all
-            ${dragging ? 'border-[#00B87D] bg-[#E8F9F3]' : 'border-[#E4E1DA] hover:border-[#00B87D] hover:bg-[#E8F9F3]'}`}
+            ${error
+              ? 'border-[#FF5C3A] bg-[#FFF0ED]'
+              : dragging
+                ? 'border-[#00B87D] bg-[#E8F9F3]'
+                : 'border-[#E4E1DA] hover:border-[#00B87D] hover:bg-[#E8F9F3]'
+            }`}
         >
-          <div className="w-16 h-16 bg-[#0D0D0F] rounded-2xl mx-auto mb-5 flex items-center justify-center">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" strokeWidth="2" strokeLinecap="round">
-              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-              <polyline points="17 8 12 3 7 8"/>
-              <line x1="12" y1="3" x2="12" y2="15"/>
-            </svg>
+          <div className={`w-16 h-16 rounded-2xl mx-auto mb-5 flex items-center justify-center ${error ? 'bg-[#FF5C3A]' : 'bg-[#0D0D0F]'}`}>
+            {error ? (
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            ) : (
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#00E5A0" strokeWidth="2" strokeLinecap="round">
+                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+                <polyline points="17 8 12 3 7 8"/>
+                <line x1="12" y1="3" x2="12" y2="15"/>
+              </svg>
+            )}
           </div>
+
           <div className="font-syne font-bold text-lg mb-2">Glisse ton PDF ici</div>
           <div className="text-sm text-[#6B6B7B]">Dépose ton fichier de cours au format <span className="text-[#00B87D] font-medium">PDF</span></div>
           <div className="flex justify-center gap-2 mt-4">
-            {['PDF','MAX 10MB'].map(t => (
+            {['PDF', `MAX ${MAX_SIZE_MB}MB`].map(t => (
               <span key={t} className="px-2.5 py-1 bg-white border border-[#E4E1DA] rounded text-xs font-syne font-semibold text-[#6B6B7B]">{t}</span>
             ))}
           </div>
         </div>
 
-        <input id="fileInput" type="file" accept=".pdf" className="hidden" onChange={(e) => handleFile(e.target.files[0])} />
+        <input
+          id="fileInput"
+          type="file"
+          accept=".pdf"
+          className="hidden"
+          onChange={(e) => handleFile(e.target.files[0])}
+          // Reset la valeur pour permettre de re-sélectionner le même fichier
+          onClick={(e) => { e.target.value = null }}
+        />
+
+        {/* Message d'erreur */}
+        {error && (
+          <div className="mt-4 p-3.5 bg-[#FFF0ED] border border-[#FF5C3A]/30 rounded-xl flex items-start gap-3">
+            <div className="w-8 h-8 bg-[#FF5C3A] rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+              </svg>
+            </div>
+            <div className="flex-1">
+              <div className="font-syne font-semibold text-sm text-[#FF5C3A]">Fichier refusé</div>
+              <div className="text-xs text-[#6B6B7B] mt-0.5">{error}</div>
+            </div>
+            <button
+              onClick={(e) => { e.stopPropagation(); setError(null) }}
+              className="text-[#6B6B7B] hover:text-[#0D0D0F] transition-colors flex-shrink-0 mt-0.5"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+        )}
 
         <div className="flex items-center gap-4 my-6 text-xs text-[#6B6B7B]">
           <div className="flex-1 h-px bg-[#E4E1DA]"/>ou<div className="flex-1 h-px bg-[#E4E1DA]"/>
@@ -79,7 +137,7 @@ export default function Home({ goTo, setPdfFile, pdfFile }) {
           Parcourir mes fichiers
         </button>
 
-        {pdfFile && (
+        {pdfFile && !error && (
           <>
             <div className="mt-5 p-3.5 bg-[#E8F9F3] border border-[#00B87D]/20 rounded-xl flex items-center gap-3">
               <div className="w-9 h-9 bg-[#00E5A0] rounded-lg flex items-center justify-center font-syne text-[9px] font-extrabold">PDF</div>
